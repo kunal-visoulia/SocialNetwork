@@ -1,4 +1,4 @@
-#just a comment
+#first commit of this repo
 import networkx as nx
 import matplotlib.pyplot as plt
 import random as rn
