@@ -17,16 +17,17 @@ def create_graph():
         G.add_node(i)
     return G
 
-def visualize(G,iname):
+def visualize(G,t):
     time.sleep(1)
     labeldict=get_labels(G)
     nodesize=get_size(G)
     color_array=get_colors(G)
     nx.draw(G,labels=labeldict,with_labels=1,node_size=nodesize,node_color=color_array)
     #plt.show()
-    plt.savefig('evolution(%d).png'%iname)
+    plt.savefig('evolution.png')
     plt.clf()
     plt.cla()
+    nx.write_gml(G,'evolution_'+str(t)+'.gml')
     
     
 def assign_bmi(G):
@@ -154,7 +155,9 @@ assign_bmi(G)
 add_foci_nodes(G)
 add_foci_edges(G)
 time.sleep(10) #code sleeps before creating jpeg file
-visualize(G,0)
+t=0
+visualize(G,t)
+
 
 '''for t in range(1,10):
     homophily(G)# commented: no homophily as of now, common neighbors will exist only if they are part of same foci 
@@ -167,8 +170,7 @@ visualize(G,0)
     visualize(G)'''
     
 #code to put these 10 graphs in a jpeg file to check how they changed
-iname=1
-for t in range(1,10):
+for t in range(0,10):
     homophily(G)# commented: no homophily as of now, common neighbors will exist only if they are part of same foci 
     #puts edge between two similar(bmi) peoples
 
@@ -176,6 +178,4 @@ for t in range(1,10):
     #puts edge between two people if they have same foci
 
     change_bmi(G)
-    visualize(G,iname)
-    iname=iname+1
-
+    visualize(G,t+1)
