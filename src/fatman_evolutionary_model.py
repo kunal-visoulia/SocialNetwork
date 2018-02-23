@@ -136,3 +136,4 @@ while 1:# to observe membership closure
     #puts edge between two people if they have same foci
     visualize(G,labeldict,nodesize,color_array)
 
+#implementing social influence 
