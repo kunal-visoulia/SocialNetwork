@@ -125,8 +125,50 @@ plt.bar([i for i in range(len(unstable_track))],unstable_track)
 plt.xlabel('no of iterations of while loop')
 plt.ylabel('no. of unstable triangles')
 plt.show()
+
+#6. now, there are no unstable triangles in the network,we choose a random node and add it to the first coalition
+def see_coalition(G):
+    first_coalition=[]
+    second_coalition=[]
+    nodes=G.nodes()
+    #6.1. choose a random node,add it to first coalition
+    r=rn.choice(nodes)
+    first_coalition.append(r)
+    #now, we look at neighbors of node 'r', nieghbors with +ve sign are friends and thus part of bfs tree(ie, they are looked further) else not
+    #in bfs we keep track of processed and unprocessed nodes
+    processed_nodes=[]
+    to_be_processed_nodes=[r]
+    
+    #6.4. Repeat 6.2 and 6.3 for all the 'unprocessed' nodes of 
+    for each in to_be_processed_nodes:
+        if each not in processed_nodes:
+            neigh=G.neighbors(each)
+            
+            for i in range(len(neigh)):
+                if G[each][neigh[i]]['sign']=='+':
+                    if neigh[i] not in first_coalition:
+                        #6.2. also put all the friends of node 'r' in the first coaltion
+                        first_coalition.append(neigh[i])
+                    if neigh not in to_be_processed_nodes:
+                        to_be_processed_nodes.append(neigh[i])
+                #6.3. also put all the enemies of node 'r' in the second coaltion        
+                elif G[each][neigh[i]]['sign']=='-':
+                    if neigh[i] not in second_coalition:
+                        second_coalition.append(neigh[i])
+                        processed_nodes.append(neigh[i])
+                            
+            processed_nodes.append(each)   
+    return first_coalition,second_coalition    
     
     
+first,second=see_coalition(G)
+print(first)
+print(second)    
+edge_labels=nx.get_edge_attributes(G,'sign')#to prevent displaying weights as 'sign=+' or 'sign=-'
+pos=nx.circular_layout(G)
+nx.draw(G,pos,node_size=5000,with_labels=True)
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels,font_size=20,font_color='red')
+plt.show()    
     
 
 
