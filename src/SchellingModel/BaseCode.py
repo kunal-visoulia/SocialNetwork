@@ -38,7 +38,7 @@ type1_node_list=[n for (n,d) in G.nodes(data=True) if d['type']==1]
 #data =true so as G.nodes()gives list of nodes as well as value of attribute of the nodes, 
 #we get (n,d) where n is the node and d is the dictionary containg the attribute and its value(type)
 type2_node_list=[n for (n,d) in G.nodes(data=True) if d['type']==2]
-empty_cells=[n for (n,d) in G.nodes(data=True) if d['type']==10]
+empty_cells=[n for (n,d) in G.nodes(data=True) if d['type']==0]
 
 def display_graph(G):
     nodes_g=nx.draw_networkx_nodes(G,pos,node_color='green',nodelist=type1_node_list)
@@ -63,7 +63,7 @@ internal_nodes_list=list(set(G.nodes())-set(boundary_nodes_list))
 
 #getting neoghbours of internal and boundary nodes
 def get_neigh_internal(u,v):
-    return [(u-1,v),(u+1,v),(u,v-1),(u,v+1)(u-1,v-1),(u+1,v-1),(u-1,v+1),(u+1,v+1)]
+    return [(u-1,v),(u+1,v),(u,v-1),(u,v+1),(u-1,v-1),(u+1,v-1),(u-1,v+1),(u+1,v+1)]
 
 def get_neigh_boundary(u,v):
     global N
@@ -106,13 +106,27 @@ def get_unsatisfied_nodes_list(G,boundary_nodes_list,internal_nodes_list):
                 
     return unsatisfied_nodes_list
 
-unsatisfied_nodes_list=get_unsatisfied_nodes_list(G, boundary_nodes_list, internal_nodes_list)
- 
+
+def make_a_node_satisfied(unsatisfied_nodes_list,empty_cells):
+    if len(unsatisfied_nodes_list)!=0:
+        node_to_shift=rn.choice(unsatisfied_nodes_list)
+        new_position=rn.choice(empty_cells)
+        
+        G.node[new_position]['type']=G.node[node_to_shift]['type']       
+        G.node[node_to_shift]['type']=0
+        labels[node_to_shift],labels[new_position]=labels[new_position],labels[node_to_shift]
     
 
+display_graph(G)       
+for i in range(10000):
+    #no. of iterations and value of t affects clustering percentage
+    unsatisfied_nodes_list=get_unsatisfied_nodes_list(G, boundary_nodes_list, internal_nodes_list)        
+    make_a_node_satisfied(unsatisfied_nodes_list, empty_cells)        
+    type1_node_list=[n for (n,d) in G.nodes(data=True) if d['type']==1]
+    type2_node_list=[n for (n,d) in G.nodes(data=True) if d['type']==2]
+    empty_cells=[n for (n,d) in G.nodes(data=True) if d['type']==0] 
 
-
-
+display_graph(G)
 
 
 
