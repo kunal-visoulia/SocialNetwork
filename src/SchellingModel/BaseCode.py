@@ -127,7 +127,7 @@ for i in range(10000):
     empty_cells=[n for (n,d) in G.nodes(data=True) if d['type']==0] 
 
 display_graph(G)
-
+#displays graph
 
 
 
