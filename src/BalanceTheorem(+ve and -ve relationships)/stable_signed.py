@@ -138,7 +138,7 @@ def see_coalition(G):
     #in bfs we keep track of processed and unprocessed nodes
     processed_nodes=[]
     to_be_processed_nodes=[r]
-    
+
     #6.4. Repeat 6.2 and 6.3 for all the 'unprocessed' nodes of 
     for each in to_be_processed_nodes:
         if each not in processed_nodes:
@@ -164,14 +164,17 @@ def see_coalition(G):
 first,second=see_coalition(G)
 print(first)
 print(second)    
-edge_labels=nx.get_edge_attributes(G,'sign')#to prevent displaying weights as 'sign=+' or 'sign=-'
-pos=nx.circular_layout(G)
-nx.draw(G,pos,node_size=5000,with_labels=True)
-nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels,font_size=20,font_color='red')
-plt.show()    
+   
     
+#7. dispalying the network with two coalitions
 
-
-
+pos=nx.circular_layout(G)
+nx.draw_networkx_nodes(G,pos,nodelist=first,node_color='red',node_size=5000,alpha=0.8)
+nx.draw_networkx_nodes(G,pos,nodelist=second,node_color='blue',node_size=5000,alpha=0.8)
+nx.draw_networkx_labels(G, pos, font_size=10, font_family='sans-serif')
+nx.draw_networkx_edges(G, pos)
+edge_labels=nx.get_edge_attributes(G,'sign')
+nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels,font_size=20,font_color='green')
+plt.show()
 
 
