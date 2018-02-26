@@ -354,7 +354,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_w50z0A2jEeiU9vwbe8P8FQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_0bqQ8A2lEeitS-2R5lslWw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_uf0PqA2jEeiU9vwbe8P8FQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_63zJEBr6EeiN9oTh9zglFg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_uf0PqA2jEeiU9vwbe8P8FQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_w50z0Q2jEeiU9vwbe8P8FQ" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -378,7 +378,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_w50z1Q2jEeiU9vwbe8P8FQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_0bvJcA2lEeitS-2R5lslWw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_ufxzhw2jEeiU9vwbe8P8FQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_634ooBr6EeiN9oTh9zglFg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_ufxzhw2jEeiU9vwbe8P8FQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_w50z1g2jEeiU9vwbe8P8FQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -2472,6 +2472,7 @@
   <commands xmi:id="_wgV80A2jEeiU9vwbe8P8FQ" elementId="AUTOGEN:::org.python.pydev.debug.VariableViewActions/org.python.pydev.debug.variableViewActions.ShowCapitalizedReferences" commandName="Show Capitalized References" description="Show Capitalized References (those beginning with an uppercase letter)" category="_ufccNQ2jEeiU9vwbe8P8FQ"/>
   <commands xmi:id="_wgV80Q2jEeiU9vwbe8P8FQ" elementId="AUTOGEN:::org.python.pydev.debug.VariableViewActions/org.python.pydev.debug.variableViewActions.ShowAllUppercaseReferences" commandName="Show All Uppercase References" description="Show All Uppercase References (those with no lower case letters)" category="_ufccNQ2jEeiU9vwbe8P8FQ"/>
   <commands xmi:id="_wgWj4A2jEeiU9vwbe8P8FQ" elementId="AUTOGEN:::org.python.pydev.debug.VariableViewActions/org.python.pydev.debug.variableViewActions.ShowFunctionAndModulsReferences" commandName="Show Function and Module References" description="Show Function and Module References" category="_ufccNQ2jEeiU9vwbe8P8FQ"/>
+  <commands xmi:id="_yVa4URr6Eeiga-PuT2E5vw" elementId="org.eclipse.egit.ui.history.CompareWithHead" commandName="Compare with HEAD Revision" category="_ufccNQ2jEeiU9vwbe8P8FQ"/>
   <addons xmi:id="_uYQ2Cw2jEeiU9vwbe8P8FQ" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_uYQ2DA2jEeiU9vwbe8P8FQ" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_uYQ2DQ2jEeiU9vwbe8P8FQ" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
