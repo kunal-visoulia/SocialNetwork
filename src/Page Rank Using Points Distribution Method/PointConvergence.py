@@ -33,17 +33,35 @@ def distribute_points(G,points):
                 new_points[each[1]]+=share
     return G,new_points       
 
+def handle_points_sink(G,points):
+    for i in range(len(points)):
+        points[i]=(float)(points[i])*0.8 
+    
+    #total number of points in graph never change
+    n=G.number_of_nodes()
+    extra=(float)(n*100*0.2)/n
+    for i in range(len(points)):
+        points[i]+=extra
+    return points
+    
 def keep_distributing_points(G,points):
     prev_points=points
     print 'Enter 3 to stop'
     while(1):
         G,new_points=distribute_points(G, prev_points)
         print new_points
+        
+        #point sink occurs when there are nodes with no outlink and it starts accumulating all the points
+        #handling point sink by taking 20% points from every node and distributing it equally to all nodes
+        new_points=handle_points_sink(G,new_points)
+        
         char=raw_input()
         if char=='3':
             break
         prev_points=new_points
     return G,new_points
+    
+
 def get_nodes_sorted_by_points(points):
     points_array=numpy.array(points)
     #returns indices sorted by value of points
@@ -71,7 +89,7 @@ def main():
     #compare the ranks thus obtained with the ranks obtained from the inbuilt PAge Rank method
     pr=nx.pagerank(G)#returns dictionary where nodes are key and page ranks are values which is unsorted
     pr_sorted=sorted(pr.items(),key=lambda x:x[1],reverse=True)
-    #pr is list of tupples
+    #pr_sorted is list of tuples
     for i in pr_sorted:
         print i[0],
     
