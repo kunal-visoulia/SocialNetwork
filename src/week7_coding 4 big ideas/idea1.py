@@ -52,6 +52,22 @@ def reset_node_attributes(G,action_dict):
     for each in action_dict:
         G.node[each]['action']=action_dict[each]
 
+def terminate_1(c,G):
+    f=1
+    for each in G.nodes():
+        if G.node[each]['action']!=c:
+            f=0
+            break
+    return f
+
+def terminate(G,count):
+    flag1=terminate_1('A',G)
+    flag2=terminate_1('B',G)
+    if flag1==1 or flag2==1 or count>=100:
+        return 1
+    else:
+        return 0
+
 G=nx.read_gml('random_graph.gml')
 
 #every node will have an attribute action and value of the action=B
@@ -64,9 +80,15 @@ colors=get_colors(G)
 nx.draw(G,node_color=colors,node_size=800,with_labels=1)
 plt.show()
 
-action_dict=recalculate_options(G)#dictionary with nodes as keys and their action as values
-
-reset_node_attributes(G,action_dict)
-colors=get_colors(G)
-nx.draw(G,node_color=colors,node_size=800,with_labels=1)
-plt.show()
+flag=0
+count=0
+while(1):
+    flag=terminate(G,count)
+    if flag==1:
+        break
+    count=count+1
+    action_dict=recalculate_options(G)#dictionary with nodes as keys and their action as values
+    reset_node_attributes(G,action_dict)
+    colors=get_colors(G)
+    nx.draw(G,node_color=colors,node_size=800,with_labels=1)
+    plt.show()
