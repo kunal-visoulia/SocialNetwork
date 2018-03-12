@@ -1,10 +1,11 @@
-#changing payoff
+#key people
+
 import networkx as nx
 import matplotlib.pyplot as plt
 
 #needed to be done only once
-#G=nx.erdos_renyi_graph(10,0.5)
-#nx.write_gml(G,'random_graph.gml')
+G=nx.erdos_renyi_graph(10,0.5)
+nx.write_gml(G,'random_graph.gml')
 
 def set_all_B(G):
     for each in G.nodes():
@@ -71,25 +72,35 @@ def terminate(G,count):
 
 G=nx.read_gml('random_graph.gml')
 
-#every node will have an attribute action and value of the action=B
-set_all_B(G)
+for u in G.nodes():
+    for v in G.nodes():
+        if u<v:
+            print u,v,' '
+            list1=[]
+            list1.append(u)
+            list1.append(v)
+            set_all_B(G)
+            set_A(G,list1)
 
-list1=[3,7]#initial adopting nodes
-set_A(G,list1)
+            colors=get_colors(G)
+            #nx.draw(G,node_color=colors,node_size=800,with_labels=1)
+            #plt.show()
 
-colors=get_colors(G)
-nx.draw(G,node_color=colors,node_size=800,with_labels=1)
-plt.show()
-
-flag=0
-count=0
-while(1):
-    flag=terminate(G,count)
-    if flag==1:
-        break
-    count=count+1
-    action_dict=recalculate_options(G)#dictionary with nodes as keys and their action as values
-    reset_node_attributes(G,action_dict)
-    colors=get_colors(G)
-    nx.draw(G,node_color=colors,node_size=800,with_labels=1)
-    plt.show()
+            flag=0
+            count=0
+            while(1):
+                flag=terminate(G,count)
+                if flag==1:
+                    break
+                count=count+1
+                action_dict=recalculate_options(G)#dictionary with nodes as keys and their action as values
+                reset_node_attributes(G,action_dict)
+                colors=get_colors(G)
+                c=terminate_1('A', G)
+                if c==1:
+                    print 'cascade complete'
+                else:
+                    print 'cascade incomplete'  
+                
+                #nx.draw(G,node_color=colors,node_size=800,with_labels=1)
+                #plt.show()
