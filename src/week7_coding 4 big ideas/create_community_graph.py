@@ -1,4 +1,3 @@
-#impact of communities on cascades
 
 import networkx as nx
 import random
