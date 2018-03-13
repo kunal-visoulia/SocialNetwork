@@ -35,7 +35,7 @@ def recalculate_options(G):
     dict1={}
     # Payoff(A)=a=4
     # Payoff(A)=b=3
-    a=4
+    a=9
     b=3
     for each in G.nodes():
         num_A=find_neigh(each,'A',G)#finds neighbour of current node that accepted action A
