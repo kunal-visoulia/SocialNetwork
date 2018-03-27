@@ -19,5 +19,5 @@ for x in range(10,1001):
         if sum1[j]==x:
             c+=1
     list2.append(c)
-plt.plot(possiblesums,list2)
+plt.loglog(possiblesums,list2)
 plt.show()
