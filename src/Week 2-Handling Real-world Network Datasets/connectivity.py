@@ -11,7 +11,7 @@ def add_nodes(n):
     G.add_nodes_from(range(n))
     return G
 
-#add e random edge
+#add a random edge
 def add_random_edge(G):
     v1=rn.choice(G.nodes())
     v2=rn.choice(G.nodes())
@@ -19,7 +19,7 @@ def add_random_edge(G):
         G.add_edge(v1,v2)
     return G
 
-#keeps random edges till it becomes connceted
+#keeps adding random edges till graph becomes connected
 def add_till_connectivity(G):
     while(nx.is_connected(G)==False):
         G=add_random_edge(G)
@@ -57,7 +57,7 @@ def plot_connect():
     i=10 #i= number of nodes
     while(i<200):
         x1.append(i)
-        y1.append(i*float(numpy.log(i))/2)
+        y1.append(i*float(numpy.log(i))/2)#number of nodes required to make a graph connected is of order nlogn
         i=i+10
     plt.plot(x1,y1,'y')
     plt.show()
