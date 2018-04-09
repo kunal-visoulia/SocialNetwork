@@ -44,8 +44,19 @@ for each in G.nodes():
     for each1 in G.neighbors(each):
         print each1,
     print '\n'
-    
-add_long_link(G)
-
 nx.draw(G,with_labels=1)
 plt.show()
+x=[0]
+y=[nx.diameter(G)]
+t=0 
+while(t<=100):
+    add_long_link(G)
+    t+=1
+    x.append(t)
+    y.append(nx.diameter(G))
+plt.xlabel('Numbe rof weak ties added')
+plt.ylabel('Diameter')
+plt.plot(x,y)
+plt.show()
+
+
