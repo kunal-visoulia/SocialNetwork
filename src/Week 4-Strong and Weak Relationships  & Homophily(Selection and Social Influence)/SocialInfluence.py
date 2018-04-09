@@ -1,5 +1,5 @@
 #implementing social influence 
-#ex: if A has joined gym(BMI decreses(loses fat)) and B being friend of and due to membership closure also joins gym and his bmi also decreses(loses weight)
+#ex: if A has joined gym(BMI decreses(loses fat)) and B being friend of and due to membership closure also joins gym and his bmi also decreases(loses weight)
 
 #first commit of this repo
 import networkx as nx
