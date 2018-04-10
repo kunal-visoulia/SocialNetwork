@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
-
+import numpy
 def add_edges(G):
     list_nodes=G.nodes()
     n=G.number_of_nodes()
@@ -70,46 +70,53 @@ def set_path_colors(G,p,p1):
             c.append('white')
     return c
 
-G=nx.Graph()
-G.add_nodes_from(range(0,100))
+x1=[] #number of nodes
+y1=[] #time taken for myopic search
+for num in [100,200,300,400,500,600,700,800,900,1000]:    
+    G=nx.Graph()
+    G.add_nodes_from(range(0,num))
 
-add_edges(G)  #add ties based on homophily
+    add_edges(G)  #add ties based on homophily
 
-#prints ties
-for each in G.nodes():
+    '''#prints ties
+    for each in G.nodes():
     print each,':',
     for each1 in G.neighbors(each):
         print each1,
     print '\n'
+    '''
+    '''we do this before adding long ties because for myopic search we look at source's all neighbors, and from these neighbors we calculate distance from target node.
+    We re not aware of week ties a neighbor node makes, so we take the graph with only homophily based ties.
+    We do search in G but calculate distance in H'''
+    H=G.copy()
+    m=[] #path lengths corrsponding to the myopic search
+    #o=[] #path lengths corrsponding to the optimal search
+    #x=[] #each point on x axis is one pair of diametrically opposite node- (0,50),(1,51)
+    l=0 
+    while(l<=G.number_of_nodes()/10): #number of weak ties= 105 of number of nodes
+        add_long_link(G)
+        l+=1
+    t=0
+    for u in range(0,(G.number_of_nodes()/2)-1):
+        v=u+G.number_of_nodes()/2
+        p=myopic_search(G,u,v)
+        #p1=nx.shortest_path(G,source=u,target=v)
+        m.append(len(p))
+        #o.append(len(p1))
+        #x.append(t)
+        t+=1
+    print G.number_of_nodes(), numpy.average(m)
+    y1.append(numpy.average(m))
+    x1.append(G.number_of_nodes())
+    #print m
+    #print x
+    #print o 
+    #nx.draw(G,with_labels=1)
+    #plt.show()
 
-'''we do this before adding long ties because for myopic search we look at source's all neighbors, and from these neighbors we calculate distance from target node.
-We re not aware of week ties a neighbor node makes, so we take the graph with only homophily based ties.
-We do search in G but calculate distance in H'''
-H=G.copy()
-m=[] #path lengths corrsponding to the myopic search
-o=[] #path lengths corrsponding to the optimal search
-x=[] #each point on x axis is one pair of diametrically opposite node- (0,50),(1,51)
-l=0 
-while(l<=10):
-    add_long_link(G)
-    l+=1
-t=0
-for u in range(0,49):
-    v=u+50 
-    print u,v
-    p=myopic_search(G,u,v)
-    p1=nx.shortest_path(G,source=u,target=v)
-    m.append(len(p))
-    o.append(len(p1))
-    x.append(t)
-    t+=1
-print m
-print x
-print o 
-nx.draw(G,with_labels=1)
-plt.show()
-plt.plot(x,m,'r')
-plt.plot(x,o,'b')
+plt.plot(x1,y1)
+        #plt.plot(x,m,'r')
+        #plt.plot(x,o,'b')
 plt.show()
 
 '''
